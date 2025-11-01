@@ -82,5 +82,17 @@ Thumbs.db
 hs_err_pid*.log
 replay_pid*.log
 
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+venv/
+database/
+*.db
+.DS_Store
+node_modules/
+
 # Optional: ignore lock file if you want clean diffs
 # pubspec.lock
