@@ -1,0 +1,69 @@
+gradle-wrapper.jar
+/.gradle
+/captures/
+/gradlew
+/intermediates/
+/gradlew.bat
+/local.properties
+GeneratedPluginRegistrant.java
+.cxx/
+
+# Remember to never publicly share your keystore.
+# See https://flutter.dev/to/reference-keystore
+key.properties
+**/*.keystore
+**/*.jks
+
+# Android & Gradle
+build/
+.gradle/
+local.properties
+*.iml
+*.apk
+*.aar
+
+# Android Studio
+.idea/
+*.iml
+captures/
+.externalNativeBuild
+.cxx
+
+# Generated files
+/app/Alert Now/build/
+/app/Alert Now/intermediates/
+/app/build/
+/app/intermediates/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Android build outputs
+/build/
+/intermediates/
+/local.properties
+/.gradle
+/captures
+*.apk
+*.aab
+*.ap_
+*.dex
+*.jar
+*.class
+
+# Gradle wrapper
+.gradle
+gradle-app.setting
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Built application files
+app/release/
+app/build/

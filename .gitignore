@@ -1,0 +1,86 @@
+# Flutter/Dart/Pub
+.dart_tool/
+.packages
+.pub/
+build/
+flutter_*.png
+*.iml
+*.idea/
+*.vscode/
+*.log
+*.hprof
+*.jks
+*.keystore
+
+# Generated files
+/.flutter-plugins
+/.flutter-plugins-dependencies
+/.metadata
+/.packages
+/pubspec.lock   # ← lock file is usually committed, keep if you want
+
+# Android
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/app/build/
+android/.gradle/
+android/build/
+android/local.properties
+
+# iOS
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/Generated.xcconfig
+ios/Flutter/app.flx
+ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/App.framework
+ios/Flutter/Flutter.podspec
+ios/build/
+ios/.generated/
+
+# macOS
+macos/Flutter/GeneratedPluginRegistrant.swift
+macos/Flutter/ephemeral/
+macos/build/
+
+# Linux
+linux/flutter/generated_plugin_registrant.cc
+linux/flutter/generated_plugin_registrant.h
+linux/flutter/ephemeral/
+linux/build/
+
+# Windows
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugin_registrant.h
+windows/flutter/ephemeral/
+windows/build/
+
+# Web
+web/favicon.png
+web/icons/Icon-192.png
+web/icons/Icon-512.png
+web/icons/Icon-maskable-192.png
+web/icons/Icon-maskable-512.png
+web/index.html
+web/manifest.json
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Crash logs
+hs_err_pid*.log
+replay_pid*.log
+
+# Optional: ignore lock file if you want clean diffs
+# pubspec.lock

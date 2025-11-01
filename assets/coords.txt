@@ -1,0 +1,164 @@
+// lib/services/location_service.dart
+import 'package:geolocator/geolocator.dart';
+import 'package:flutter/services.dart' show rootBundle;
+
+class LocationService {
+  static Map<String, List<double>> barangayMap = {};
+  static Map<String, List<double>> municipalityMap = {};
+  static bool coordinatesLoaded = false;
+
+  Future<void> loadCoordinates() async {
+    if (coordinatesLoaded) return;
+    try {
+      String data = await rootBundle.loadString('assets/coords.txt');
+      data.split('\n').forEach((line) {
+        var parts = line.split(',').map((s) => s.trim()).toList();
+        if (parts.length == 4) {
+          String type = parts[0];
+          String name = parts[1];
+          double lat = double.parse(parts[2]);
+          double lon = double.parse(parts[3]);
+          if (type == 'barangay') {
+            barangayMap[name] = [lat, lon];
+          } else if (type == 'municipality') {
+            municipalityMap[name] = [lat, lon];
+          }
+        }
+      });
+      coordinatesLoaded = true;
+    } catch (e) {
+        barangayMap['Barangay Atisan'] = [13.9818, 121.3182];
+        barangayMap['Barangay Bagong Bayan'] = [14.0665, 121.3250];
+        barangayMap['Barangay Bagong Pook'] = [14.0759, 121.3206];
+        barangayMap['Barangay Bautista'] = [13.9921, 121.2827];
+        barangayMap['Barangay Concepcion'] = [14.0791, 121.3384];
+        barangayMap['Barangay Del Remedio'] = [14.0785, 121.3135];
+        barangayMap['Barangay Dolores'] = [14.1029, 121.3341];
+        barangayMap['Barangay San Antonio 1'] = [14.0097, 121.3373];
+        barangayMap['Barangay San Antonio 2'] = [13.9963, 121.3333];
+        barangayMap['Barangay San Bartolome'] = [14.0272, 121.2884];
+        barangayMap['Barangay San Buenaventura'] = [14.1140, 121.3284];
+        barangayMap['Barangay San Crispin'] = [14.0794, 121.2827];
+        barangayMap['Barangay San Cristobal'] = [14.0490, 121.4056];
+        barangayMap['Barangay San Diego'] = [14.0920, 121.3742];
+        barangayMap['Barangay San Francisco'] = [14.0661, 121.3399];
+        barangayMap['Barangay San Gabriel'] = [14.0591, 121.3170];
+        barangayMap['Barangay San Gregorio'] = [14.0472, 121.3284];
+        barangayMap['Barangay San Ignacio'] = [14.0456, 121.3399];
+        barangayMap['Barangay San Isidro'] = [13.9880, 121.3113];
+        barangayMap['Barangay San Jose'] = [14.0647, 121.3856];
+        barangayMap['Barangay San Juan'] = [14.0924, 121.2998];
+        barangayMap['Barangay San Lorenzo'] = [14.1107, 121.3513];
+        barangayMap['Barangay San Lucas 1'] = [14.0828, 121.3263];
+        barangayMap['Barangay San Lucas 2'] = [14.0898, 121.3270];
+        barangayMap['Barangay San Marcos'] = [14.1034, 121.3041];
+        barangayMap['Barangay San Mateo'] = [14.1093, 121.2984];
+        barangayMap['Barangay San Miguel'] = [14.0351, 121.3055];
+        barangayMap['Barangay Santa Monica'] = [14.0549, 121.3013];
+        barangayMap['Barangay San Nicolas'] = [14.0675, 121.2941];
+        barangayMap['Barangay San Pedro'] = [14.0937, 121.3356];
+        barangayMap['Barangay San Rafael'] = [14.0710, 121.3055];
+        barangayMap['Barangay San Roque'] = [14.0640, 121.3098];
+        barangayMap['Barangay San Vicente'] = [14.0181, 121.3393];
+        barangayMap['Barangay Santa Ana'] = [14.0156, 121.3263];
+        barangayMap['Barangay Santa Catalina'] = [14.1210, 121.3423];
+        barangayMap['Barangay Santa Cruz'] = [14.0270, 121.3505];
+        barangayMap['Barangay Santa Felomina'] = [14.0893, 121.2872];
+        barangayMap['Barangay Santa Maria'] = [14.0275, 121.3115];
+        barangayMap['Barangay Santa Veronica'] = [14.0469, 121.2881];
+        barangayMap['Barangay Santiago 1'] = [14.0204, 121.2783];
+        barangayMap['Barangay Santiago 2'] = [14.0090, 121.2738];
+        barangayMap['Barangay Santisima Trinidad'] = [14.2650, 121.5150];
+        barangayMap['Barangay Santo Angel'] = [14.2700, 121.5200];
+        barangayMap['Barangay Santo Cristo'] = [14.0634, 121.3303];
+        barangayMap['Barangay Santo Niño'] = [14.0448, 121.3489];
+        barangayMap['Barangay Soledad'] = [14.0401, 121.3157];
+        barangayMap['Barangay I-A'] = [14.0733, 121.3163];
+        barangayMap['Barangay I-B'] = [14.0692, 121.3164];
+        barangayMap['Barangay II-A'] = [14.0632, 121.3196];
+        barangayMap['Barangay II-B'] = [14.0633, 121.3216];
+        barangayMap['Barangay II-C'] = [14.0656, 121.3229];
+        barangayMap['Barangay II-D'] = [14.0674, 121.3232];
+        barangayMap['Barangay II-E'] = [14.0653, 121.3253];
+        barangayMap['Barangay II-F'] = [14.0610, 121.3227];
+        barangayMap['Barangay III-A'] = [14.0670, 121.3268];
+        barangayMap['Barangay III-B'] = [14.0696, 121.3278];
+        barangayMap['Barangay III-C'] = [14.0673, 121.3294];
+        barangayMap['Barangay III-D'] = [14.0702, 121.3313];
+        barangayMap['Barangay III-E'] = [14.0710, 121.3333];
+        barangayMap['Barangay III-F'] = [14.0683, 121.3283];
+        barangayMap['Barangay IV-A'] = [14.0723, 121.3292];
+        barangayMap['Barangay IV-B'] = [14.3650, 121.6150];
+        barangayMap['Barangay IV-C'] = [14.3700, 121.6200];
+        barangayMap['Barangay V-A'] = [14.0748, 121.3246];
+        barangayMap['Barangay V-B'] = [14.0736, 121.3249];
+        barangayMap['Barangay V-C'] = [14.0734, 121.3255];
+        barangayMap['Barangay V-D'] = [14.0714, 121.3252];
+        barangayMap['Barangay VI-A'] = [14.0736, 121.3234];
+        barangayMap['Barangay VI-B'] = [14.0785, 121.3233];
+        barangayMap['Barangay VI-D'] = [14.0781, 121.3191];
+        barangayMap['Barangay VI-E'] = [14.0750, 121.3179];
+        barangayMap['Barangay VII-A'] = [14.0704, 121.3216];
+        barangayMap['Barangay VII-B'] = [14.0697, 121.3239];
+        barangayMap['Barangay VII-C'] = [14.0691, 121.3250];
+        barangayMap['Barangay VII-D'] = [14.0687, 121.3256];
+        barangayMap['Barangay VII-E'] = [14.0680, 121.3241];
+        barangayMap['Barangay Anastacia'] = [13.9600, 121.3200];
+        barangayMap['Barangay Aquino'] = [13.9650, 121.3250];
+        barangayMap['Barangay Ayusan'] = [13.9700, 121.3300];
+        barangayMap['Barangay Bago'] = [13.9750, 121.3350];
+        barangayMap['Barangay Behia'] = [13.9800, 121.3400];
+        barangayMap['Barangay Bukal'] = [13.9850, 121.3450];
+        barangayMap['Barangay Bula'] = [13.9900, 121.3500];
+        barangayMap['Barangay Bulakin'] = [13.9950, 121.3550];
+        barangayMap['Barangay Cabatang'] = [14.0000, 121.3600];
+        barangayMap['Barangay Cabay'] = [14.0050, 121.3650];
+        barangayMap['Barangay Del Rosario'] = [14.0100, 121.3700];
+        barangayMap['Barangay Lagalag'] = [14.0150, 121.3750];
+        barangayMap['Barangay Laiya'] = [14.0200, 121.5100];
+        barangayMap['Barangay Lalig'] = [14.0250, 121.3850];
+        barangayMap['Barangay Lumingon'] = [14.0300, 121.3900];
+        barangayMap['Barangay Lusacan'] = [14.0350, 121.3950];
+        barangayMap['Barangay Paiisa'] = [14.0400, 121.4000];
+        barangayMap['Barangay Palagao'] = [14.0450, 121.4050];
+        barangayMap['Barangay Poblacion I'] = [14.0500, 121.4100];
+        barangayMap['Barangay Poblacion II'] = [14.0550, 121.4150];
+        barangayMap['Barangay Poblacion III'] = [14.0600, 121.4200];
+        barangayMap['Barangay Poblacion IV'] = [14.0650, 121.4250];
+        barangayMap['Barangay Quipot'] = [14.0700, 121.4300];
+        barangayMap['Barangay San Agustin'] = [14.0750, 121.4350];
+        barangayMap['Barangay San Antonio'] = [14.0800, 121.4400];
+        barangayMap['Barangay San Apolinaro'] = [14.0850, 121.4450];
+        barangayMap['Barangay San Isidro'] = [14.0900, 121.4500];
+        barangayMap['Barangay San Jose'] = [14.0950, 121.4550];
+        barangayMap['Barangay San Juan'] = [14.1000, 121.4600];
+        barangayMap['Barangay San Pedro'] = [14.1050, 121.4650];
+        barangayMap['Barangay Tagbakin'] = [14.1100, 121.4700];
+      municipalityMap['San Pablo City'] = [14.0642, 121.3233];
+      municipalityMap['Quezon Province'] = [13.9347, 121.9473];
+      coordinatesLoaded = true;
+      print('Error loading coordinates: $e, using fallback');
+    }
+  }
+
+  Future<Position> getCurrentLocation() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) throw Exception('Location services disabled');
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+        throw Exception('Location permission denied');
+      }
+    }
+    return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+  }
+
+  List<double> getBarangayCoordinates(String barangay) {
+    return barangayMap[barangay] ?? [14.5995, 120.9842]; // Default Manila
+  }
+
+  List<double> getMunicipalityCoordinates(String municipality) {
+    return municipalityMap[municipality] ?? [14.5995, 120.9842]; // Default Manila
+  }
+}
