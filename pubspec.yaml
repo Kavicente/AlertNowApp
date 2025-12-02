@@ -26,7 +26,7 @@ dependencies:
   package_info_plus: ^8.3.1             # Pinned to satisfy geolocator_linux
   google_maps_flutter: ^2.9.0            # Google Maps for resident.dart
   intl: ^0.20.2                         # Time formatting
-  connectivity_plus: ^7.0.0              # Network status checking
+  connectivity_plus: 6.1.5
 
 dev_dependencies:
   flutter_lints: ^6.0.0

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:audioplayers/audioplayers.dart';
 import '../services/db_service.dart';
 import '../services/location_service.dart';
 import '../services/network_service.dart';
@@ -22,11 +21,9 @@ class _HospitalsPageState extends State<HospitalsPage> {
   IO.Socket? socket;
   SharedPreferences? prefs;
   final List<Map<String, dynamic>> alertsList = [];
-  final AudioPlayer audioPlayer = AudioPlayer();
   late DatabaseService dbHelper;
   bool isNetworkAvailable = true;
   final ScrollController _scrollController = ScrollController();
-  bool _isPlayingAlert = false;
 
   @override
   void initState() {
@@ -92,16 +89,7 @@ class _HospitalsPageState extends State<HospitalsPage> {
         });
       });
 
-      socket!.on('redirected_alert', (data) {
-        print('Received redirected_alert: $data');
-        final alert = data as Map<String, dynamic>;
-        if (alert['target_role'] == 'hospital' && mounted) {
-          setState(() {
-            alertsList.insert(0, alert);
-          });
-          _playAlertSound();
-        }
-      });
+      
 
       socket!.on('hospital_response', (data) {
         print('Received hospital_response: $data');
@@ -122,17 +110,6 @@ class _HospitalsPageState extends State<HospitalsPage> {
     }
   }
 
-  void _playAlertSound() async {
-    if (_isPlayingAlert) return;
-    _isPlayingAlert = true;
-
-    try {
-      await audioPlayer.setReleaseMode(ReleaseMode.loop);
-      await audioPlayer.play(AssetSource('alert.mp3'));
-    } catch (e) {
-      print('Error playing alert sound: $e');
-    }
-  }
 
   void _showImageDialog(String base64Image) {
     final bytes = base64Decode(base64Image);
@@ -253,8 +230,6 @@ class _HospitalsPageState extends State<HospitalsPage> {
   void dispose() {
     socket?.disconnect();
     socket?.dispose();
-    audioPlayer.stop();
-    audioPlayer.dispose();
     _scrollController.dispose();
     super.dispose();
   }

@@ -39,7 +39,7 @@
     },
     {
       "name": "connectivity_plus",
-      "rootUri": "file:///C:/Users/Vince/AppData/Local/Pub/Cache/hosted/pub.dev/connectivity_plus-7.0.0",
+      "rootUri": "file:///C:/Users/Vince/AppData/Local/Pub/Cache/hosted/pub.dev/connectivity_plus-6.1.5",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -423,9 +423,9 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///C:/Users/Vince/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.16.0",
+      "rootUri": "file:///C:/Users/Vince/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.17.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.5"
     },
     {
       "name": "mgrs_dart",
@@ -669,7 +669,7 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///C:/Users/Vince/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.7.6",
+      "rootUri": "file:///C:/Users/Vince/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.7.7",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -747,8 +747,8 @@
     }
   ],
   "generator": "pub",
-  "generatorVersion": "3.9.2",
+  "generatorVersion": "3.10.1",
   "flutterRoot": "file:///C:/Users/Vince/flutter",
-  "flutterVersion": "3.35.7",
+  "flutterVersion": "3.38.3",
   "pubCache": "file:///C:/Users/Vince/AppData/Local/Pub/Cache"
 }

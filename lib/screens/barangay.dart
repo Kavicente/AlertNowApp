@@ -25,7 +25,6 @@ class _BarangayPageState extends State<BarangayPage> {
   late DatabaseService dbHelper;
   bool isNetworkAvailable = true;
   final ScrollController _scrollController = ScrollController();
-  bool _isPlayingAlert = false;
 
   @override
   void initState() {
