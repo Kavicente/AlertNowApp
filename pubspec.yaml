@@ -18,7 +18,6 @@ dependencies:
   latlong2: ^0.9.1                      # Lat-long utilities
   flutter_local_notifications: ^19.4.2   # Notifications
   cupertino_icons: ^1.0.8               # iOS-style icons
-  audioplayers: ^6.0.0                  # Audio playback for alerts
   characters: ^1.4.0                    # Pinned to Flutter SDK version
   material_color_utilities: ^0.11.1     # Pinned to Flutter SDK version
   meta: ^1.16.0                         # Pinned to Flutter SDK version

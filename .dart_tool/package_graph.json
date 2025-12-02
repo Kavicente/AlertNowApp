@@ -7,7 +7,6 @@
       "name": "alert_now",
       "version": "1.0.0",
       "dependencies": [
-        "audioplayers",
         "characters",
         "connectivity_plus",
         "cupertino_icons",
@@ -140,25 +139,6 @@
       "name": "characters",
       "version": "1.4.0",
       "dependencies": []
-    },
-    {
-      "name": "audioplayers",
-      "version": "6.5.1",
-      "dependencies": [
-        "audioplayers_android",
-        "audioplayers_darwin",
-        "audioplayers_linux",
-        "audioplayers_platform_interface",
-        "audioplayers_web",
-        "audioplayers_windows",
-        "file",
-        "flutter",
-        "http",
-        "meta",
-        "path_provider",
-        "synchronized",
-        "uuid"
-      ]
     },
     {
       "name": "cupertino_icons",
@@ -482,81 +462,6 @@
       ]
     },
     {
-      "name": "uuid",
-      "version": "4.5.1",
-      "dependencies": [
-        "crypto",
-        "fixnum",
-        "meta",
-        "sprintf"
-      ]
-    },
-    {
-      "name": "synchronized",
-      "version": "3.4.0",
-      "dependencies": []
-    },
-    {
-      "name": "file",
-      "version": "7.0.1",
-      "dependencies": [
-        "meta",
-        "path"
-      ]
-    },
-    {
-      "name": "audioplayers_windows",
-      "version": "4.2.1",
-      "dependencies": [
-        "audioplayers_platform_interface",
-        "flutter"
-      ]
-    },
-    {
-      "name": "audioplayers_web",
-      "version": "5.1.1",
-      "dependencies": [
-        "audioplayers_platform_interface",
-        "flutter",
-        "flutter_web_plugins",
-        "web"
-      ]
-    },
-    {
-      "name": "audioplayers_platform_interface",
-      "version": "7.1.1",
-      "dependencies": [
-        "collection",
-        "flutter",
-        "meta",
-        "plugin_platform_interface"
-      ]
-    },
-    {
-      "name": "audioplayers_linux",
-      "version": "4.2.1",
-      "dependencies": [
-        "audioplayers_platform_interface",
-        "flutter"
-      ]
-    },
-    {
-      "name": "audioplayers_darwin",
-      "version": "6.3.0",
-      "dependencies": [
-        "audioplayers_platform_interface",
-        "flutter"
-      ]
-    },
-    {
-      "name": "audioplayers_android",
-      "version": "5.2.1",
-      "dependencies": [
-        "audioplayers_platform_interface",
-        "flutter"
-      ]
-    },
-    {
       "name": "flutter_local_notifications_platform_interface",
       "version": "9.1.0",
       "dependencies": [
@@ -585,6 +490,16 @@
         "flutter_local_notifications_platform_interface",
         "path",
         "xdg_directories"
+      ]
+    },
+    {
+      "name": "uuid",
+      "version": "4.5.1",
+      "dependencies": [
+        "crypto",
+        "fixnum",
+        "meta",
+        "sprintf"
       ]
     },
     {
@@ -1017,23 +932,6 @@
       ]
     },
     {
-      "name": "fixnum",
-      "version": "1.1.1",
-      "dependencies": []
-    },
-    {
-      "name": "sprintf",
-      "version": "7.0.0",
-      "dependencies": []
-    },
-    {
-      "name": "crypto",
-      "version": "3.0.6",
-      "dependencies": [
-        "typed_data"
-      ]
-    },
-    {
       "name": "xml",
       "version": "6.6.1",
       "dependencies": [
@@ -1048,6 +946,23 @@
       "dependencies": [
         "meta",
         "path"
+      ]
+    },
+    {
+      "name": "fixnum",
+      "version": "1.1.1",
+      "dependencies": []
+    },
+    {
+      "name": "sprintf",
+      "version": "7.0.0",
+      "dependencies": []
+    },
+    {
+      "name": "crypto",
+      "version": "3.0.6",
+      "dependencies": [
+        "typed_data"
       ]
     },
     {
@@ -1134,11 +1049,24 @@
       ]
     },
     {
+      "name": "file",
+      "version": "7.0.1",
+      "dependencies": [
+        "meta",
+        "path"
+      ]
+    },
+    {
       "name": "typed_data",
       "version": "1.4.0",
       "dependencies": [
         "collection"
       ]
+    },
+    {
+      "name": "synchronized",
+      "version": "3.4.0",
+      "dependencies": []
     },
     {
       "name": "vm_service",
