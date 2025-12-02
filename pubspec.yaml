@@ -1,0 +1,49 @@
+name: alert_now
+description: A cross-platform emergency alert app
+version: 1.0.0
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  socket_io_client: ^3.1.2               # Socket.io for real-time
+  sqflite: ^2.3.0                       # SQLite database
+  http: ^1.2.2                          # HTTP requests
+  shared_preferences: ^2.2.2            # Persistent storage
+  geolocator: ^14.0.2                   # Location services
+  image_picker: ^1.1.2                  # Image handling
+  path_provider: ^2.1.1                 # File system access
+  flutter_map: ^8.2.2                   # Maps for dashboards
+  latlong2: ^0.9.1                      # Lat-long utilities
+  flutter_local_notifications: ^19.4.2   # Notifications
+  cupertino_icons: ^1.0.8               # iOS-style icons
+  audioplayers: ^6.0.0                  # Audio playback for alerts
+  characters: ^1.4.0                    # Pinned to Flutter SDK version
+  material_color_utilities: ^0.11.1     # Pinned to Flutter SDK version
+  meta: ^1.16.0                         # Pinned to Flutter SDK version
+  timezone: ^0.10.1                     # Timezone support for alerts
+  unicode: ^0.3.1                       # Pinned to satisfy mgrs_dart
+  package_info_plus: ^8.3.1             # Pinned to satisfy geolocator_linux
+  google_maps_flutter: ^2.9.0            # Google Maps for resident.dart
+  intl: ^0.20.2                         # Time formatting
+  connectivity_plus: ^7.0.0              # Network status checking
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/background.png
+    - assets/coords.txt
+    - assets/menu.txt
+    - assets/alert.mp3
+    - assets/alertnow_background.png
+    - assets/alertlogo.png
+    - assets/alertnow_round.png
+    - assets/alertnow_icon.png
+    - assets/app_icon.png
+    - assets/alert_icon.png
+    - assets/AlertNowLocal.db
