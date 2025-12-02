@@ -1,20 +1,34 @@
 name: Build iOS IPA
-on: [workflow_dispatch]  # Manual trigger
+on: [workflow_dispatch]
+
 jobs:
   build:
-    runs-on: macos-14  # Cloud macOS
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+
       - run: flutter pub get
+
+      # THIS BLOCK FIXES audioplayers_darwin
+      - name: Fix audioplayers_darwin
+        run: |
+          cd ios
+          pod deintegrate
+          rm -rf Pods Podfile.lock
+          pod install --repo-update
+          cd ..
+
       - run: flutter build ipa --release --no-codesign
+
       - run: |
           cd build/ios/iphoneos
           mkdir Payload
           cp -r Runner.app Payload/
           zip -r9 ../../AlertNow.ipa Payload/
+
       - uses: actions/upload-artifact@v4
         with:
           name: AlertNow.ipa
