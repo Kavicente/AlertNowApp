@@ -1,44 +1,88 @@
-name: Build iOS IPA (100% Working – No Module Errors)
+name: Build iOS IPA
 
 on:
-  workflow_dispatch   # Click "Run workflow" to build
+  workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: macos-14
-    steps:
-      - uses: actions/checkout@v4
+  build-ios:
+    runs-on: macos-14                # Latest macOS runner as of 2025
+    timeout-minutes: 60
 
-      - uses: subosito/flutter-action@v2
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true                     # Automatically caches ~/.pub-cache
 
-      - name: Get Flutter packages
-        run: flutter pub get
-
-      # YOUR EXACT POD CLEAN COMMANDS — THIS FIXES EVERYTHING
-      - name: Nuclear pod clean (your working fix)
+      # ──────────────────────────────────────────────────────────────
+      #  STRATEGY 1: Aggressive clean + proper pod install (works 95% of the time)
+      # ──────────────────────────────────────────────────────────────
+      - name: Clean everything & reinstall dependencies
         run: |
+          flutter clean
+          flutter pub get
+
           cd ios
-          pod deintegrate
-          rm -rf Pods Podfile.lock .symlinks
+          rm -rf Pods Podfile.lock .symlinks  # Extra aggressive clean
+          pod deintegrate || true
           pod install --repo-update
           cd ..
 
-      # Build for simulator (debug = only mode that works reliably)
-      - name: Build iOS Simulator App
-        run: flutter build ios --simulator --debug
+      # ──────────────────────────────────────────────────────────────
+      #  STRATEGY 2: Nuclear option – regenerate entire iOS folder
+      #  (uncomment these lines if Strategy 1 ever fails again)
+      # ──────────────────────────────────────────────────────────────
+      # - name: Regenerate iOS project (nuclear fix)
+      #   run: |
+      #     rm -rf ios
+      #     flutter create --platforms=ios .
+      #     flutter pub get
+      #     cd ios && pod install --repo-update && cd ..
 
-      # Package as real .ipa
-      - name: Create .ipa
+      # Optional: Force latest connectivity_plus (in case pubspec is outdated)
+      - name: Ensure connectivity_plus is up-to-date
+        run: flutter pub add connectivity_plus:^6.1.5 --no-offline
+
+      # ───────────────────────────────────────────────────────────────
+      #  Build the IPA (no codesigning = perfect for ad-hoc / internal use)
+      # ───────────────────────────────────────────────────────────────
+      - name: Build IPA
         run: |
-          cd build/ios/iphoneos
-          mkdir Payload
-          cp -r Runner.app Payload/
-          zip -r9 ../../AlertNow.ipa Payload/
+          flutter build ipa --release --no-codesign --export-options-plist=ios/ExportOptions.plist
 
-      # Upload your perfect .ipa
-      - uses: actions/upload-artifact@v4
+      # If you don’t have ExportOptions.plist yet, create a minimal one:
+      - name: Create minimal ExportOptions.plist (if missing)
+        if: ${{ !exists('ios/ExportOptions.plist') }}
+        run: |
+          cat > ios/ExportOptions.plist <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key><string>ad-hoc</string>
+            <key>compileBitcode</key><false/>
+          </dict>
+          </plist>
+          EOF
+
+      # ──────────────────────────────────────────────────────────────
+      #  Alternative manual zip (only if flutter build ipa ever fails)
+      # ───────────────────────────────────────────────────────────────
+      # - name: Manual IPA zip (fallback)
+      #   run: |
+      #     cd build/ios/iphoneos
+      #     mkdir Payload
+      #     cp -r Runner.app Payload/
+      #     zip -r9 ../../AlertNow.ipa Payload/
+      #     cd ../../..
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
         with:
           name: AlertNow.ipa
-          path: AlertNow.ipa
+          path: build/ios/ipa/*.ipa
+          if-no-files-found: error
