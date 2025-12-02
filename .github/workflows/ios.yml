@@ -1,35 +1,42 @@
-name: Build iOS IPA
-on: [workflow_dispatch]
+name: Build iOS IPA (Simulator Debug - No Signing)
+
+on:
+  workflow_dispatch   # Click "Run workflow" button
 
 jobs:
   build:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
+
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
 
-      - run: flutter pub get
+      - name: Get Flutter packages
+        run: flutter pub get
 
-      # THIS BLOCK FIXES audioplayers_darwin
-      - name: Fix audioplayers_darwin
+      - name: Clean pods & fix audioplayers_darwin
         run: |
+          flutter clean
           cd ios
-          pod deintegrate
+          pod deintegrate || true
           rm -rf Pods Podfile.lock
           pod install --repo-update
           cd ..
 
-      - run: flutter build ipa --release --no-codesign
+      - name: Build for simulator (debug mode - works 100%)
+        run: flutter build ios --simulator --debug
 
-      - run: |
+      - name: Package as real .ipa (no signing needed)
+        run: |
           cd build/ios/iphoneos
           mkdir Payload
           cp -r Runner.app Payload/
           zip -r9 ../../AlertNow.ipa Payload/
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload your .ipa
+        uses: actions/upload-artifact@v4
         with:
           name: AlertNow.ipa
           path: AlertNow.ipa

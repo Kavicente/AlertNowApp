@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:audioplayers/audioplayers.dart';
 import '../services/db_service.dart';
 import '../services/location_service.dart';
 import '../services/network_service.dart';
@@ -23,7 +22,6 @@ class _BarangayPageState extends State<BarangayPage> {
   late IO.Socket socket;
   late SharedPreferences prefs;
   final List<Map<String, dynamic>> alertsList = [];
-  final AudioPlayer audioPlayer = AudioPlayer();
   late DatabaseService dbHelper;
   bool isNetworkAvailable = true;
   final ScrollController _scrollController = ScrollController();
@@ -100,7 +98,6 @@ class _BarangayPageState extends State<BarangayPage> {
           setState(() {
             alertsList.insert(0, alert);
           });
-          _playAlertSound();
         }
       });
 
@@ -128,17 +125,7 @@ class _BarangayPageState extends State<BarangayPage> {
     }
   }
 
-  void _playAlertSound() async {
-    if (_isPlayingAlert) return;
-    _isPlayingAlert = true;
-
-    try {
-      await audioPlayer.setReleaseMode(ReleaseMode.loop);
-      await audioPlayer.play(AssetSource('alert.mp3'));
-    } catch (e) {
-      print('Error playing alert sound: $e');
-    }
-  }
+  
 
   void _showImageDialog(String base64Image) {
     final bytes = base64Decode(base64Image);
@@ -251,8 +238,6 @@ class _BarangayPageState extends State<BarangayPage> {
   void dispose() {
     socket.disconnect();
     socket.dispose();
-    audioPlayer.stop();
-    audioPlayer.dispose();
     _scrollController.dispose();
     super.dispose();
   }

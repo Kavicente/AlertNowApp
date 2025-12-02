@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:audioplayers/audioplayers.dart';
 import '../services/db_service.dart';
 import '../services/location_service.dart';
 import '../services/network_service.dart';
@@ -20,11 +19,9 @@ class _CityHealthPageState extends State<CityHealthPage> {
   IO.Socket? socket;
   SharedPreferences? prefs;
   final List<Map<String, dynamic>> alertsList = [];
-  final AudioPlayer audioPlayer = AudioPlayer();
   late DatabaseService dbHelper;
   bool isNetworkAvailable = true;
   final ScrollController _scrollController = ScrollController();
-  bool _isPlayingAlert = false;
 
   @override
   void initState() {
@@ -96,7 +93,6 @@ class _CityHealthPageState extends State<CityHealthPage> {
           setState(() {
             alertsList.insert(0, alert);
           });
-          _playAlertSound();
         }
       });
 
@@ -119,17 +115,7 @@ class _CityHealthPageState extends State<CityHealthPage> {
     }
   }
 
-  void _playAlertSound() async {
-    if (_isPlayingAlert) return;
-    _isPlayingAlert = true;
-
-    try {
-      await audioPlayer.setReleaseMode(ReleaseMode.loop);
-      await audioPlayer.play(AssetSource('alert.mp3'));
-    } catch (e) {
-      print('Error playing alert sound: $e');
-    }
-  }
+  
 
   void _onRespond(String alertId, String barangay, String type, bool accepted) {
     final responseData = {
@@ -251,8 +237,6 @@ class _CityHealthPageState extends State<CityHealthPage> {
   void dispose() {
     socket?.disconnect();
     socket?.dispose();
-    audioPlayer.stop();
-    audioPlayer.dispose();
     _scrollController.dispose();
     super.dispose();
   }
